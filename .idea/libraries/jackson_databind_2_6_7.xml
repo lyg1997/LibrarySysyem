@@ -1,0 +1,21 @@
+<component name="libraryTable">
+  <library name="jackson-databind-2.6.7">
+    <ANNOTATIONS>
+      <root url="jar://D:/jackson-databind-2.6.7.jar!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="jar://D:/jackson-databind-2.6.7.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://D:/jackson-databind-2.6.7.jar!/" />
+    </JAVADOC>
+    <NATIVE>
+      <root url="jar://D:/jackson-databind-2.6.7.jar!/" />
+    </NATIVE>
+    <SOURCES>
+      <root url="jar://D:/jackson-databind-2.6.7.jar!/" />
+    </SOURCES>
+    <jarDirectory url="jar://D:/jackson-databind-2.6.7.jar!/" recursive="false" />
+    <jarDirectory url="jar://D:/jackson-databind-2.6.7.jar!/" recursive="false" type="SOURCES" />
+  </library>
+</component>

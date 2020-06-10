@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lyg.dao.BookDao">
+    <select id="findBookList" resultType="BookInfo">
+        select b.*,t.type from book_info b,type_info t
+        where b.type_id = t.type_id
+    </select>
+    <select id="bookDetail" resultType="BookInfo">
+        select b.*,t.type from book_info b,type_info t
+        where b.type_id = t.type_id and book_id = #{book_id}
+    </select>
+    <insert id="addBook" parameterType="BookInfo">
+        insert into book_info(bookName,author,publish,number,ISBN,introduction,language,price,pub_date,type_id)
+        values (#{bookName},#{author}, #{publish}, #{number},
+               #{ISBN}, #{introduction},#{language},#{price}, ${pub_date},(select type_id from type_info where type = #{type}))
+    </insert>
+    <delete id="bookDel" parameterType="int">
+        delete from book_info where book_id = #{book_id};
+    </delete>
+    <update id="bookUpdate" parameterType="BookInfo">
+        update book_info set
+        bookName = #{bookName},author = #{author},publish = #{publish},ISBN = #{ISBN},language = #{language },
+        pub_date = #{pub_date},number = #{number},price = #{price},introduction = #{introduction},
+        type_id = (select type_id from type_info where type = #{type})
+        where book_id = #{book_id}
+    </update>
+
+    <select id="selectById" parameterType="int" resultType="BookInfo">
+        SELECT *
+        from book_info
+        where book_id = #{book_id}
+    </select>
+
+    <!-- 减少图书库存 -->
+    <update id="reduceStock" parameterType="int">
+        UPDATE  book_info SET numner=number-1
+        where book_id=#{book_id}
+    </update>
+</mapper>

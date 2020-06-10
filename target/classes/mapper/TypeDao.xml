@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        <!-- 设置为IUserDao接口方法提供sql语句配置 -->
+<mapper namespace="lyg.dao.TypeDao">
+<select id="findCateGory" resultType="Category">
+        select * from type_info
+    </select>
+
+    <insert id="addCategory" parameterType="String">
+        insert into type_info(type)
+        values (#{type})
+    </insert>
+    <delete id="categoryDel" parameterType="int">
+        delete from type_info
+        where type_id = #{type_id}
+    </delete>
+</mapper>

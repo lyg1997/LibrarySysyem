@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 设置为IUserDao接口方法提供sql语句配置 -->
+<mapper namespace="lyg.dao.UserDao">
+    <select id="queryUser" resultType="int">
+select u.status,r.card_state from user u,reader_info r
+where (u.id = #{id} and u.password = #{password}) or (r.reader_id = #{id} and r.password = #{password})
+    </select>
+    <select id="userLogin" resultType="int">
+   select status from user
+   where id = #{id} and password = #{password}
+    </select>
+    <select id="findUserList" resultType="ReaderInfo">
+        SELECT * FROM reader_info;
+    </select>
+
+    <insert id="addReader" parameterType="ReaderInfo">
+        insert into reader_info(
+        reader_id,name,sex,birthday,address,telephone,password
+        )values(#{reader_id},#{name},#{sex},#{birthday},#{address},#{telephone},"123456")
+    </insert>
+    <insert id="addUser" parameterType="Integer">
+        insert into user(id,password,userName)
+        values (#{reader_id},"123456",(select name from reader_info where reader_id = #{id}))
+    </insert>
+    <delete id="readerDel" parameterType="Integer">
+        delete from reader_info
+        where id = #{id}
+    </delete>
+    <select id="userSearch" resultType="User">
+        select * from user
+        where userName like '%${userName}%'
+    </select>
+    <select id="readerDetail" resultType="ReaderInfo">
+        select * from reader_info
+        where id = #{id}
+    </select>
+    <update id="readerUpdate" parameterType="ReaderInfo">
+        update reader_info set
+        reader_id = #{reader_id},name = #{name},sex = #{sex},
+        birthday = #{birthday},address = #{address},telephone = #{telephone}
+        where id = #{id}
+    </update>
+    <update id="editPwd" parameterType="ReaderInfo">
+        update reader_info set
+        password = #{newPwd}
+        where password = #{password} and reader_id = #{id}
+    </update>
+    <select id="getUserName" resultType="String">
+        select userName from user
+        where id = #{id}
+    </select>
+</mapper>
